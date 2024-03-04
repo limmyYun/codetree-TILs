@@ -53,16 +53,16 @@ void Simulate() {
             int bestW = 0;
             int bestD = 0;
             int bestN = 0;
-            tuple<int, int, int> t = make_tuple(0,0,0);
+            //tuple<int, int, int> t = make_tuple(0,0,0);
             int WWW = 0;
             int a=0, b=0, c=0;
             for(int v = 0; v<next_map[i][j].size(); v++) {
                 tie(a,b,c) = next_map[i][j][v];
                 bestW += a;
-                if(a > WWW) {
+                if(b > WWW) {
                     bestD = c;
                     bestN = b;
-                    WWW = a;
+                    WWW = bestN;
                 }
             }
             map[i][j].push_back(make_tuple(bestW, bestN, bestD));
