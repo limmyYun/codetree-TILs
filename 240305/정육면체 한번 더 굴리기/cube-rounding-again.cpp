@@ -56,7 +56,7 @@ void roll() {
 }
 
 int calculate() {
-    int visited[21][21];
+    int visited[21][21] = {};
     int num = 0;
     int amount = 1;
     queue<tuple<int, int>> que;
