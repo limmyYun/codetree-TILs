@@ -74,11 +74,11 @@ bool check(int r, int c, int len) {
 tuple<int, int> getSquare(int x) {
     int startR=outr-x+1, startC=outc-x+1;
     bool pass = false;
-    for(int i=startR; i<startR+x; i++) {
-        for(int j=startC; j<startC+x; j++) {
-            if(i<0 || j<0 || i>=N || j>=N) continue;
-            pass = check(i, j, x);
-            if(pass) return make_tuple(i,j);
+    for(int i=0; i<x; i++) {
+        for(int j=0; j<x; j++) {
+            if((i+startR)<0 || (j+startC)<0 || (i+startR)>=N || (j+startC)>=N) continue;
+            pass = check(i+startR, j+startC, x);
+            if(pass) return make_tuple(i+startR,j+startC);
         }
     }
 }
@@ -158,7 +158,7 @@ int main() {
         // 출구와 참가자 포함한 가장 작은 정사각형 구하기
         // 출구와 exit 사이의 거리 중 가장 짧은 거리 구해서 변의 길이 구하기
         int shortest = 20;
-        int nowx = 0, nowy = 0, nowF;
+        int nowx = 0, nowy = 0, nowF=0;
         for(int i=0;i<N;i++) {
             for(int j=0;j<N;j++) {
                 if(map[i][j] <10) continue;
