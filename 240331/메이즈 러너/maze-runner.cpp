@@ -22,14 +22,7 @@ void move() {
     int r=0, c=0;
 
     for(int i=0; i<p.size(); i++) {
-        //cout<<"p.size() = "<< p.size()<<endl;
         tie(r,c) = p[i];
-//         cout<<"r : "<<r<<" c : "<<c<<endl;
-// for(int i=0;i<p.size();i++){
-//     int a=0, b=0;
-//     tie(a,b) = p[i];
-//     cout<<"a : "<<a<<" b : "<<b<<endl;
-// }
         
         for (int d=0; d<4; d++) {
             int sx = r + dy[d];
@@ -39,7 +32,6 @@ void move() {
 
             if (map[sx][sy] == -1) {
                 // 탈출
-                //cout<<"here"<<endl;
                 moveLen++;
                 leftP--;
                 if(map[r][c] >= 11) map[r][c]--;
@@ -47,12 +39,6 @@ void move() {
 
                 p.erase(p.begin()+i);
                 i--;
-// for(int j=0;j<p.size();j++){
-//     int a=0, b=0;
-//     tie(a,b) = p[j];
-//     cout<<"a : "<<a<<" b : "<<b<<endl;
-// }
-// cout<<endl;
                 break;
             }
             
@@ -92,7 +78,6 @@ tuple<int, int> getSquare(int x) {
         for(int j=startC; j<startC+x; j++) {
             if(i<0 || j<0 || i>=N || j>=N) continue;
             pass = check(i, j, x);
-            //cout<<"check i : "<<i<<" j : "<<j<<" x : "<<x<< "pass : "<<pass<<endl;
             if(pass) return make_tuple(i,j);
         }
     }
@@ -104,7 +89,6 @@ void rotate(int r, int c, int len) {
     for(int i=0; i<len; i++){
         for(int j=0; j<len; j++) {
             tmp[r+j][c+len-1-i] = map[r+i][c+j];
-            //cout<<"array r: "<<r+i<<" c: "<<c+j<<" re r : "<<r+j<<" c : "<<c+len-1-i<<endl;
             if(map[r+i][c+j] >= 10) {
                 for(int person = 0; person<p.size(); person++) {
                     int m=0, n=0;
@@ -167,26 +151,9 @@ int main() {
 // }
 // cout<<endl;
         move();
-// for(int i=0;i<N;i++) {
-//     for(int j=0;j<N;j++) {
-//         cout<<map[i][j]<<" ";
-//     }
-//     cout<<endl;
-// }
-// cout<<endl;
-
-        // 모든 참가자 탈출시 종료
-        if(leftP <= 0) break;
 
         // 출구와 참가자 포함한 가장 작은 정사각형 구하기
         // 출구와 exit 사이의 거리 중 가장 짧은 거리 구해서 변의 길이 구하기
-// for(int i=0;i<N;i++) {
-//     for(int j=0;j<N;j++) {
-//         cout<<map[i][j]<<" ";
-//     }
-//     cout<<endl;
-// }
-// cout<<endl;
         int shortest = 20;
         int nowx = 0, nowy = 0, nowF;
         for(int i=0;i<N;i++) {
@@ -200,20 +167,12 @@ int main() {
         }
         int r=0, c=0;
         shortest++;
-        //cout<<"r : "<<r<<" c : "<<c<<" shortest : "<<shortest<<" outr : "<<outr<<" outcc : "<<outc<<endl;
         tie(r,c) = getSquare(shortest);
-
-        //cout<<"before rotate r : "<<r<<" c : "<<c<<" shortest : "<<shortest<<endl;
 
         // 정사각형 회전
         rotate(r, c, shortest);
-// for(int i=0;i<N;i++) {
-//     for(int j=0;j<N;j++) {
-//         cout<<map[i][j]<<" ";
-//     }
-//     cout<<endl;
-// }
-// cout<<endl;
+        // 모든 참가자 탈출시 종료
+        if(leftP <= 0) break;
     }
 
     cout<<moveLen<<endl;
