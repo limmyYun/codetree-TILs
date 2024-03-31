@@ -49,7 +49,7 @@ void move() {
             if(map[r][c] >= 11) map[r][c]--;
             else if(map[r][c] == 10) map[r][c] = 0;
 
-            if(map[sx][sy]>=11) map[sx][sy]++;
+            if(map[sx][sy]>=10) map[sx][sy]++;
             else if(map[sx][sy]==0) map[sx][sy] = 10;
             moveLen++;
             get<0>(p[i]) = sx;
