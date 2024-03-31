@@ -152,6 +152,9 @@ int main() {
 // cout<<endl;
         move();
 
+        // 모든 참가자 탈출시 종료
+        if(leftP <= 0) break;
+
         // 출구와 참가자 포함한 가장 작은 정사각형 구하기
         // 출구와 exit 사이의 거리 중 가장 짧은 거리 구해서 변의 길이 구하기
         int shortest = 20;
@@ -171,8 +174,6 @@ int main() {
 
         // 정사각형 회전
         rotate(r, c, shortest);
-        // 모든 참가자 탈출시 종료
-        if(leftP <= 0) break;
     }
 
     cout<<moveLen<<endl;
