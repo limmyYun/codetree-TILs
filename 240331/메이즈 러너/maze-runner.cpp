@@ -85,19 +85,13 @@ tuple<int, int> getSquare(int x) {
 
 void rotate(int r, int c, int len) {
     int tmp[11][11];
+    vector<tuple<int, int, int, int>> changeP;
 
     for(int i=0; i<len; i++){
         for(int j=0; j<len; j++) {
             tmp[r+j][c+len-1-i] = map[r+i][c+j];
             if(map[r+i][c+j] >= 10) {
-                for(int person = 0; person<p.size(); person++) {
-                    int m=0, n=0;
-                    tie(m,n) = p[person];
-                    if((m==r+i) && (n==c+j)) {
-                        get<0>(p[person]) = r+j;
-                        get<1>(p[person]) = c+len-1-i;
-                    }
-                }
+                changeP.push_back(make_tuple(r+i, c+j, r+j, c+len-1-i));
             }
         }
     }
@@ -109,6 +103,18 @@ void rotate(int r, int c, int len) {
                 outr = r+i;
                 outc = c+j;
             } else if((map[r+i][c+j]>0) && (map[r+i][c+j]<=9)) map[r+i][c+j]--;
+        }
+    }
+    for(int person = 0; person<p.size(); person++) {
+        int pr=0, pc=0;
+        tie(pr, pc) = p[person];
+        for(int newPerson = 0; newPerson<changeP.size(); newPerson++) {
+            int br=0, bc=0, ar=0, ac=0;
+            tie(br, bc, ar, ac) = changeP[newPerson];
+            if((br==pr) && (bc==pc)) {
+                get<0>(p[person]) = ar;
+                get<1>(p[person]) = ac;
+            }
         }
     }
 }
@@ -137,7 +143,7 @@ int main() {
 
     for (int t=0; t<K; t++) {
         // 참가자 이동 - 이동 횟수 계산
-//         cout<<" t : "<<t<<endl;
+        //cout<<" t : "<<t<<" moveLen : "<<moveLen<<endl;
 // for(int i=0;i<p.size();i++){
 //     int a=0, b=0;
 //     tie(a,b) = p[i];
@@ -171,7 +177,6 @@ int main() {
         int r=0, c=0;
         shortest++;
         tie(r,c) = getSquare(shortest);
-
         // 정사각형 회전
         rotate(r, c, shortest);
     }
