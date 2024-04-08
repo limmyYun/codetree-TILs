@@ -71,7 +71,7 @@ void init() {
         for (int j = 0; j < 11; j++) {
             used[i][j] = false;
             visited[i][j] = false;
-            way[i][j] = 1;
+            way[i][j] = 0;
         }
     }
 }
@@ -116,10 +116,11 @@ bool rAttack() {
         int wayDamage = startD / 2;
         while (true) {
             //cout<<"currentR : "<<cr<<" currentC : "<<cc<<" currentD : "<<cd<<endl;
-            if (cr == startR && cc == startC) break;
 
             int tr = (cr + dy[cd]+4)%4;
             int tc = (cc + dx[cd]+4)%4;
+
+            if (tr == startR && tc == startC) break;
 
             used[tr][tc] = true;
             get<0>(map[tr][tc]) -= wayDamage;
@@ -183,6 +184,7 @@ int main() {
         // 공격자 선정
         chooseTop();
         //cout<<"startR : "<<startR<<" startC : "<<startC<<" startD : "<<startD<<endl;
+        //cout<<"startR : "<<startR<<" startC : "<<startC<<" get<0>(map[][]) : "<<get<0>(map[startR][startC])<<endl;
 
         // 공격 대상자 선정
         chooseKillTop();
@@ -196,6 +198,8 @@ int main() {
         // 레이저 공격
         init();
         rOK = rAttack();
+        //cout<<" 2 startR : "<<startR<<" startC : "<<startC<<" startD : "<<startD<<endl;
+        //cout<<" 2 startR : "<<startR<<" startC : "<<startC<<" get<0>(map[][]) : "<<get<0>(map[startR][startC])<<endl;
 
         // 포탄 공격
         if (!rOK) tAttack();
