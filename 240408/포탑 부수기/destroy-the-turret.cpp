@@ -90,8 +90,8 @@ bool rAttack() {
         que.pop();
 
         for (int d = 0; d < 4; d++) {
-            int sx = (r + dy[d]+4)%4;
-            int sy = (c + dx[d]+4)%4;
+            int sx = (r + dy[d]+N)%N;
+            int sy = (c + dx[d]+M)%M;
 
             if (visited[sx][sy]) continue;
             if (get<0>(map[sx][sy]) == 0) continue;
@@ -117,8 +117,8 @@ bool rAttack() {
         while (true) {
             //cout<<"currentR : "<<cr<<" currentC : "<<cc<<" currentD : "<<cd<<endl;
 
-            int tr = (cr + dy[cd]+4)%4;
-            int tc = (cc + dx[cd]+4)%4;
+            int tr = (cr + dy[cd]+N)%N;
+            int tc = (cc + dx[cd]+M)%M;
 
             if (tr == startR && tc == startC) break;
 
@@ -142,8 +142,8 @@ void tAttack() {
     used[endR][endC] = true;
 
     for (int d = 0; d < 8; d++) {
-        int sx = (endR + dy2[d] + 8)%8;
-        int sy = (endC + dx2[d]+8)%8;
+        int sx = (endR + dy2[d] + N)%N;
+        int sy = (endC + dx2[d]+M)%M;
 
         if (get<0>(map[sx][sy]) == 0) continue;
         if (sx == startR && sy == startC) continue;
@@ -215,6 +215,12 @@ int main() {
 
         // 최근에 공격한 턴 증가
         get<1>(map[startR][startC]) = k+1;
+// for(int i=0;i<N;i++){
+//     for(int j=0;j<M;j++){
+//         cout<< get<0>(map[i][j])<<" ";
+//     }
+//     cout<<endl;
+// }
     }
 
     chooseKillTop();
