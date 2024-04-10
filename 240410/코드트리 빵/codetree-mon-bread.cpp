@@ -72,7 +72,7 @@ void movePerson(int pi, int conr, int conc, int perr, int perc) {
             get<0>(p[pi]) = curr;
             get<1>(p[pi]) = curc;
             //cout << "here 2 pi : " << pi << endl;
-            cout << "moved curr " << curr << " curc : " << curc << endl;
+            //cout << "moved curr " << curr << " curc : " << curc << endl;
             break;
         }
         curr = movr;
@@ -84,15 +84,15 @@ void move(int inNum) {
     int pr = 0, pc = 0;
     int cr = 0, cc = 0;
     //cout <<"inNum : "<< inNum << endl;
-    if (inNum + 1 >= M) inNum = M-1;
+    if (inNum + 1 >= M) inNum = M - 1;
     //cout << "inNum 2 : " << inNum << endl;
-    for (int i = 0; i < inNum+1; i++) {
+    for (int i = 0; i < inNum + 1; i++) {
         //cout << "why i : " << i << endl;
         if (arrived[i]) continue;
         tie(pr, pc) = p[i];
         tie(cr, cc) = con[i];
-        cout << "i : " << i << " pr : " << pr << " pc : " << pc << " cr : " << cr << " cc : " << cc<<endl;
-        movePerson(i, cr,cc, pr, pc);
+        //cout << "i : " << i << " pr : " << pr << " pc : " << pc << " cr : " << cr << " cc : " << cc << endl;
+        movePerson(i, cr, cc, pr, pc);
     }
     //cout << "here";
 }
@@ -117,10 +117,10 @@ int getDistance(int startp, int mr, int mc) {
     bool visited[16][16] = {};
     que.push(make_tuple(0, mr, mc));
 
-    int curd=0, curr = 0, curc = 0;
+    int curd = 0, curr = 0, curc = 0;
     int conr = get<0>(con[startp]);
     int conc = get<1>(con[startp]);
-    while (true) {
+    while (!que.empty()) {
         tie(curd, curr, curc) = que.front();
         que.pop();
 
@@ -139,6 +139,7 @@ int getDistance(int startp, int mr, int mc) {
             }
         }
     }
+    return 100;
 }
 
 bool comp(tuple<int, int, int> a, tuple<int, int, int> b) {
@@ -196,26 +197,26 @@ int main() {
 
     int t = 0;
     while (1) {
-        cout << "t : " << t << endl;
-        for (int i = 0; i < con.size(); i++) {
-            cout << "con i : " << i << " r : " << get<0>(con[i]) << " c : " << get<1>(con[i]) << endl;
-}
+        //cout << "t : " << t << endl;
+        //for (int i = 0; i < con.size(); i++) {
+        //    cout << "con i : " << i << " r : " << get<0>(con[i]) << " c : " << get<1>(con[i]) << endl;
+        //}
         // 현재 map에 존재하는 사람 위치 옮기기
-        move(t-1);
-        cout << "t : " << t << endl;
+        move(t - 1);
+        //cout << "t : " << t << endl;
 
         // 옮겨진 사람들이 편의점 도착했는지 확인
         check();
-        cout << "t : " << t << endl;
+        //cout << "t : " << t << endl;
 
         // t번째 사람이 있다면 베이스 캠프로 옮겨주기
         if (t + 1 <= p.size()) {
             startPerson(t);
         }
-        cout << "t : " << t << endl;
+        //cout << "t : " << t << endl;
         if (lp <= 0) break;
         t++;
     }
-    cout << t+1;
+    cout << t + 1;
     return 0;
 }
