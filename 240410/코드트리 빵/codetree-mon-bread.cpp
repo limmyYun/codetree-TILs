@@ -32,7 +32,7 @@ void movePerson(int pi, int conr, int conc, int perr, int perc) {
 
     int curr = 0, curc = 0;
     bool found = false;
-    while (true) {
+    while (!que.empty()) {
         tie(curr, curc) = que.front();
         que.pop();
 
@@ -119,7 +119,7 @@ int getDistance(int startp, int mr, int mc) {
     int curd=0, curr = 0, curc = 0;
     int conr = get<0>(con[startp]);
     int conc = get<1>(con[startp]);
-    while (true) {
+    while (!que.empty()) {
         tie(curd, curr, curc) = que.front();
         que.pop();
 
