@@ -32,7 +32,7 @@ void movePerson(int pi, int conr, int conc, int perr, int perc) {
 
     int curr = 0, curc = 0;
     bool found = false;
-    while (!que.empty()) {
+    while (true) {
         tie(curr, curc) = que.front();
         que.pop();
 
