@@ -119,7 +119,7 @@ int getDistance(int startp, int mr, int mc) {
     int curd=0, curr = 0, curc = 0;
     int conr = get<0>(con[startp]);
     int conc = get<1>(con[startp]);
-    while (!que.empty()) {
+    while (true) {
         tie(curd, curr, curc) = que.front();
         que.pop();
 
