@@ -72,6 +72,7 @@ void movePerson(int pi, int conr, int conc, int perr, int perc) {
             get<0>(p[pi]) = curr;
             get<1>(p[pi]) = curc;
             //cout << "here 2 pi : " << pi << endl;
+            cout << "moved curr " << curr << " curc : " << curc << endl;
             break;
         }
         curr = movr;
@@ -90,7 +91,7 @@ void move(int inNum) {
         if (arrived[i]) continue;
         tie(pr, pc) = p[i];
         tie(cr, cc) = con[i];
-        //cout << "i : " << i << " pr : " << pr << " pc : " << pc << " cr : " << cr << " cc : " << cc<<endl;
+        cout << "i : " << i << " pr : " << pr << " pc : " << pc << " cr : " << cr << " cc : " << cc<<endl;
         movePerson(i, cr,cc, pr, pc);
     }
     //cout << "here";
@@ -195,20 +196,23 @@ int main() {
 
     int t = 0;
     while (1) {
-        //cout << "t : " << t << endl;
+        cout << "t : " << t << endl;
+        for (int i = 0; i < con.size(); i++) {
+            cout << "con i : " << i << " r : " << get<0>(con[i]) << " c : " << get<1>(con[i]) << endl;
+}
         // 현재 map에 존재하는 사람 위치 옮기기
         move(t-1);
-        //cout << "t : " << t << endl;
+        cout << "t : " << t << endl;
 
         // 옮겨진 사람들이 편의점 도착했는지 확인
         check();
-        //cout << "t : " << t << endl;
+        cout << "t : " << t << endl;
 
         // t번째 사람이 있다면 베이스 캠프로 옮겨주기
         if (t + 1 <= p.size()) {
             startPerson(t);
         }
-        //cout << "t : " << t << endl;
+        cout << "t : " << t << endl;
         if (lp <= 0) break;
         t++;
     }
