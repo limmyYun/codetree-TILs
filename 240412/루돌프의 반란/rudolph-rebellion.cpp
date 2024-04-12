@@ -29,7 +29,7 @@ void dfs(int r, int c, int mr, int mc, int direction, int flag) {
 		return;
 	}
 
-	if (map[mr][mc] != 0) {
+	if ((map[mr][mc] != 0) && !((r==mr) && (c==mc))) {
 		int movr = 0;
 		int movc = 0;
 		if (flag == 0) {
