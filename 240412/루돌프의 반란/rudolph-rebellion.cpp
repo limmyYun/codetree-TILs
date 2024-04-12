@@ -46,8 +46,8 @@ void dfs(int r, int c, int mr, int mc, int direction, int flag) {
 
 	int idx = map[r][c]-1;
 	//cout << "before update : idx : " << idx << endl;
-	map[mr][mc] = idx+1;
 	map[r][c] = 0;
+	map[mr][mc] = idx + 1;
 	get<0>(s[idx]) = mr;
 	get<1>(s[idx]) = mc;
 	//cout << "update : map[mr][mc] : " << map[mr][mc] << " get<0>(s[idx]) : " << get<0>(s[idx]) << " get<1>(s[idx]) : " << get<1>(s[idx]) << endl;
