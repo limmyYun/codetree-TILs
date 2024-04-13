@@ -9,6 +9,7 @@ int L, N, Q;
 int map[41][41];
 int damage[31];
 bool dead[31];
+int ans[31];
 
 vector<tuple<int, int>> cmd;
 vector<tuple<int, int>> kh[31];
@@ -113,7 +114,6 @@ int main() {
 		cmdw = get<0>(cmd[i]);
 		cmdd = get<1>(cmd[i]);
 		//cout << endl;
-		//cout << " i : " << i << " cmdw : " << cmdw << " cmdd : " << cmdd<<endl;
 		if (dead[cmdw]) continue;
 
 		// 움직여야할 기사들 번호 넣기
@@ -122,7 +122,6 @@ int main() {
 		vector<int> nv;
 		bool ignoreCmd = false;
 		bool alreadyInStack[31] = {};
-		//vector<int> score;
 
 		stk.push(cmdw);
 		alreadyInStack[cmdw] = true;
@@ -134,7 +133,6 @@ int main() {
 				
 				if ((tmpv.size()!=0) && (tmpv[0] == -1)) {
 					ignoreCmd = true;
-					//cout << "break" << endl;
 					break;
 				}
 				for (int p = 0; p < tmpv.size(); p++) {
@@ -142,7 +140,6 @@ int main() {
 					nv.push_back(tmpv[p]);
 					stk.push(tmpv[p]);
 					alreadyInStack[tmpv[p]] = true;
-					//cout << "push nv p : " << p << " who : " << tmpv[p] << endl;
 				}
 			}
 
@@ -151,7 +148,6 @@ int main() {
 			v = nv;
 			nv.clear();
 		}
-		//cout << "first" << endl;
 
 		if (ignoreCmd) continue;
 
@@ -160,9 +156,6 @@ int main() {
 		while (!stk.empty()) {
 			moving = stk.top();
 			stk.pop();
-			//if (moving != cmdw) score.push_back(moving);
-
-			//cout << "mmmmmmmm" << endl;
 
 			move(moving, cmdd);
 		}
@@ -172,7 +165,10 @@ int main() {
 			for (int g = 0; g < L; g++) {
 				if (map[f][g] != 1) continue;
 				if ((khmap[f][g] == cmdw+1) || khmap[f][g] == 0) continue;
+				if (!alreadyInStack[khmap[f][g] - 1]) continue;
 				damage[khmap[f][g] - 1]--;
+				ans[khmap[f][g] - 1]++;
+				//cout << "damage hert khmap[f][g] - 1 : " << khmap[f][g] - 1 <<"ans[khmap[f][g] - 1] : "<< ans[khmap[f][g] - 1]<< endl;
 				if (damage[khmap[f][g] - 1] <= 0) {
 					dead[khmap[f][g] - 1] = true;
 
@@ -186,12 +182,13 @@ int main() {
 		}
 	}
 
-	int ans = 0;
+	int answer = 0;
 	for (int i = 0; i < Q; i++) {
 		if (dead[i]) continue;
-		ans += damage[i];
+		//cout << "i : " << i << " ans[i] : " << ans[i] << endl;
+		answer += ans[i];
 	}
 
-	cout << ans;
+	cout << answer;
 	return 0;
 }
