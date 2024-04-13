@@ -173,9 +173,10 @@ int main() {
 					dead[khmap[f][g] - 1] = true;
 
 					int size = kh[khmap[f][g] - 1].size();
+					int idx = khmap[f][g] - 1;
 					for (int b = 0; b < size; b++) {
 						//cout << "get<0>(kh[khmap[f][g] - 1][b]) : " << get<0>(kh[khmap[f][g] - 1][b]) << " get<1>(kh[khmap[f][g] - 1][b]) : " << get<1>(kh[khmap[f][g] - 1][b]) << endl;
-						khmap[get<0>(kh[khmap[f][g] - 1][b])][get<1>(kh[khmap[f][g] - 1][b])] = 0;
+						khmap[get<0>(kh[idx][b])][get<1>(kh[idx][b])] = 0;
 					}
 				}
 			}
