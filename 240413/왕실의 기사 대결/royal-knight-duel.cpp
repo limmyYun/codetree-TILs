@@ -183,7 +183,7 @@ int main() {
 	}
 
 	int answer = 0;
-	for (int i = 0; i < Q; i++) {
+	for (int i = 0; i < N; i++) {
 		if (dead[i]) continue;
 		//cout << "i : " << i << " ans[i] : " << ans[i] << endl;
 		answer += ans[i];
