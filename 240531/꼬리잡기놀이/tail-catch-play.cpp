@@ -186,6 +186,58 @@ int getScoreAndChange(int r, int c) {
     }
     // check pos
     if ((r == fr) && (c == fc)) pos = 1;
+    else if ((r == er) && (c == ec)) {
+        int num = 0;
+        for (int d = 0; d < 4; d++) {
+            int sr = r + dy[d];
+            int sc = c + dx[d];
+            if (sr < 0 || sc < 0 || sr >= n || sc >= n) continue;
+            if (map[sr][sc] == 0 || map[sr][sc] == 4 || map[sr][sc] == 3||map[sr][sc]==2) continue;
+            num++;
+        }
+
+        if (num == 1) pos = 2;
+        else {
+            bool visited2[21][21];
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < n; j++) {
+                    visited2[i][j] = false;
+                }
+            }
+
+            pos = 0;
+            queue<tuple<int, int, int>> que2;
+            que2.push(make_tuple(r, c, 1));
+            visited2[r][c] = true;
+            int newr = 0, newc = 0, newp = 0;
+            bool found = false;
+            while (true) {
+                if (found) break;
+                tie(newr, newc, newp) = que2.front();
+                que2.pop();
+
+                for (int d = 0; d < 4; d++) {
+                    int sr = newr + dy[d];
+                    int sc = newc + dx[d];
+                    if (sr < 0 || sc < 0 || sr >= n || sc >= n) continue;
+                    if (map[sr][sc] == 0 || map[sr][sc] == 4 || visited2[sr][sc] || map[sr][sc] == 3) continue;
+                    if (map[newr][newc] == 3) {
+                        if (map[sr][sc] == 1) {
+                            continue;
+                        }
+                    }
+
+                    visited2[sr][sc] = true;
+                    que2.push(make_tuple(sr, sc, newp + 1));
+
+                    if (map[sr][sc] == 1) {
+                        found = true;
+                        pos = newp + 1;
+                    }
+                }
+            }
+        }
+    }
     else {
         bool visited2[21][21];
         for (int i = 0; i < n; i++) {
@@ -222,6 +274,7 @@ int getScoreAndChange(int r, int c) {
         }
     }
 
+    // change
     int tmpF = map[fr][fc];
     int tmpE = map[er][ec];
     map[fr][fc] = tmpE;
