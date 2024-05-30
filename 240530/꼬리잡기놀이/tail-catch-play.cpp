@@ -176,8 +176,8 @@ int getScoreAndChange(int r, int c) {
                 fc = sc;
             }
             else if (map[sr][sc] == 3) {
-                er = r;
-                ec = c;
+                er = sr;
+                ec = sc;
             }
         }
     }
