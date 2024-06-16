@@ -24,12 +24,25 @@ int died[5][5];
 queue<int> babyMonster[5][5];
 
 void printMonsterSize(){
+    cout<<"printMonsterSize"<<endl;
     for(int i=0;i<4;i++){
         for(int j=0;j<4;j++){
             cout<<monster[i][j].size()<<" ";
         }
         cout<<endl;
     }
+    cout<<endl;
+}
+
+void printdied(){
+    cout<<"printdied"<<endl;
+    for(int i=0;i<4;i++){
+        for(int j=0;j<4;j++){
+            cout<<died[i][j]<<" ";
+        }
+        cout<<endl;
+    }
+    cout<<endl;
 }
 
 void makeBabyMoster(){
@@ -88,6 +101,7 @@ int tmpKill(int fm, int sm, int tm) {
     int gc = pc;
     bool visited[4][4];
     memset(visited, false, sizeof(visited));
+    //visited[gr][gc] = true;
 
     for(int dir = 0; dir<d.size(); dir++) {
         gr = gr + pdy[d[dir]];
@@ -142,7 +156,7 @@ void moveMan() {
         int size = monster[newPr][newPc].size();
         if(size>0) {
             while(!monster[newPr][newPc].empty()) monster[newPr][newPc].pop();
-            died[newPc][newPr] = 3;
+            died[newPr][newPc] = 3;
         }
         pr = newPr;
         pc = newPc;
@@ -188,11 +202,17 @@ int main() {
     //printMonsterSize();
 
     for(int ct = 0; ct<t; ct++){
+        //cout<<"turn : "<<ct+1<<endl;
         // 1. 몬스터 복제
         makeBabyMoster();
+
+        //printMonsterSize();
         
         // 2. 몬스터 이동
         moveMonsters();
+
+        //printMonsterSize();
+        //printdied();
 
         // 3. 팩맨의 이동
         moveMan();
