@@ -108,7 +108,7 @@ int tmpKill(int fm, int sm, int tm) {
         gr = gr + pdy[d[dir]];
         gc = gc + pdx[d[dir]];
         if (gr < 0 || gc < 0 || gr >= 4 || gc >= 4) {
-            num = 0;
+            num = -1;
             break;
         }
         if(visited[gr][gc]) continue;
@@ -122,7 +122,7 @@ tuple<int, int, int> findBestWay() {
     tuple<int, int, int> best;
 
     int numDied = 0;
-    int bestDied = 0;
+    int bestDied = -1;
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < 4; j++) {
             for (int k = 0; k < 4; k++) {
