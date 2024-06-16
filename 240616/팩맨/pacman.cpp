@@ -65,9 +65,10 @@ void moveMonsters(){
                 int monsterDir = monster[i][j].front();
                 monster[i][j].pop();
 
-                for(int d=monsterDir; d<monsterDir+8; d++){
+                for(int d0=monsterDir; d0<monsterDir+8; d0++){
                     if(isOut) break;
-                    d = d%8;
+
+                    int d = d0%8;
                     int sr = i + mdy[d];
                     int sc = j + mdx[d];
                     if(sr<0 || sc<0 || sr>=4 || sc>=4) continue;
