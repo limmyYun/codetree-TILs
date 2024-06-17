@@ -19,7 +19,7 @@ bool check(int r, int c) {
         num++;
     }
 
-    if(num>=3) return true;
+    if(num==3) return true;
     else return false;
 }
 
