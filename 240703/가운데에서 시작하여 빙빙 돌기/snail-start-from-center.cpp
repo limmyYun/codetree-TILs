@@ -44,7 +44,7 @@ int main() {
 
         if(line == 3) {
             count++;
-            line = 0;
+            line = 1;
         }
 
         cr = cr + dy[d];
