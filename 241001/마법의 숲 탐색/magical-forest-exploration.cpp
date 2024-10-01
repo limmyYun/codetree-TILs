@@ -244,7 +244,7 @@ int main() {
 		// 정령 이동
 		int n = moveMan(cr, cc, map[cr][cc]);
 		total += n;
-		cout << "i : " << i << " maxR : " << n << endl;
+		// cout << "i : " << i << " maxR : " << n << endl;
 	}
 
 	cout << total;
