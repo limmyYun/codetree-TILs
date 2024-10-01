@@ -9,6 +9,7 @@ using namespace std;
 int R, C, K;
 int map[71][71];
 bool center[71][71];
+bool out[71][71];
 
 int dx[4] = { 0, 1, 0, -1 };
 int dy[4] = { -1, 0, 1, 0 };
@@ -152,7 +153,7 @@ int moveMan(int r, int c, int v) {
 				que.push(make_tuple(sr, sc, map[sr][sc]));
 			}
 			else {
-				if (nv == 2) {
+				if (out[nr][nc]) {
 					if (maxR < sr) maxR = sr;
 					visited[sr][sc] = true;
 					que.push(make_tuple(sr, sc, map[sr][sc]));
@@ -183,6 +184,7 @@ int main() {
 		for (int j = 0; j < C; j++) {
 			map[i][j] = 0;
 			center[i][j] = false;
+			out[i][j] = false;
 		}
 	}
 
@@ -213,6 +215,7 @@ int main() {
 						for (int j = 0; j < C; j++) {
 							map[i][j] = 0;
 							center[i][j] = false;
+							out[i][j] = false;
 						}
 					}
 					noCal = true;
@@ -224,7 +227,7 @@ int main() {
 						int sr = cr + dy[d];
 						int sc = cc + dx[d];
 						map[sr][sc] = cnt;
-						if (d == cd) map[sr][sc] = 2;
+						if (d == cd) out[sr][sc] = true;
 					}
 					center[cr][cc] = true;
 					cnt++;
