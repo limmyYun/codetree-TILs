@@ -19,7 +19,7 @@ int cr, cc, cd;
 int cnt = 3;
 
 bool down() {
-	bool isOk = false;
+	bool isOk = true;
 
 	int mr = cr + 1;
 	int mc = cc;
@@ -42,15 +42,19 @@ bool down() {
 }
 
 bool leftDown() {
-	bool isOk = false;
+	bool isOk = true;
 
 	int mr = cr;
 	int mc = cc - 1;
 
 	// left check
 	for (int d = 2; d < 5; d++) {
-		int sr = mr + dy[d%4];
-		int sc = mc + dx[d%4];
+		int sr = mr + dy[d % 4];
+		int sc = mc + dx[d % 4];
+		if (sc < 0 || sc >= C) {
+			isOk = false;
+			break;
+		}
 		if ((mr < 1) && (sr < 0 || sr >= R)) continue;
 		if ((sr < 0 || sc < 0 || sr >= R || sc >= C) || (map[sr][sc] != 0)) {
 			isOk = false;
@@ -61,7 +65,7 @@ bool leftDown() {
 	if (!isOk) return isOk;
 
 	// down check
-	isOk = false;
+	isOk = true;
 	mr = mr + 1;
 	for (int d = 1; d < 4; d++) {
 		int sr = mr + dy[d];
@@ -82,7 +86,7 @@ bool leftDown() {
 }
 
 bool rightDown() {
-	bool isOk = false;
+	bool isOk = true;
 
 	int mr = cr;
 	int mc = cc + 1;
@@ -91,6 +95,10 @@ bool rightDown() {
 	for (int d = 0; d < 3; d++) {
 		int sr = mr + dy[d % 4];
 		int sc = mc + dx[d % 4];
+		if (sc < 0 || sc >= C) {
+			isOk = false;
+			break;
+		}
 		if ((mr < 1) && (sr < 0 || sr >= R)) continue;
 		if ((sr < 0 || sc < 0 || sr >= R || sc >= C) || (map[sr][sc] != 0)) {
 			isOk = false;
@@ -101,7 +109,7 @@ bool rightDown() {
 	if (!isOk) return isOk;
 
 	// down check
-	isOk = false;
+	isOk = true;
 	mr = mr + 1;
 	for (int d = 1; d < 4; d++) {
 		int sr = mr + dy[d];
@@ -163,7 +171,7 @@ int moveMan(int r, int c, int v) {
 		}
 	}
 
-	return maxR+1;
+	return maxR + 1;
 }
 
 int main() {
@@ -204,7 +212,7 @@ int main() {
 
 			if (isExit == false) {
 				// 더이상 갈 수 없고 map 초과했을 때
-				if (cr < 1 || cc == 0 || cc == C - 1 || cr == R-1) {
+				if (cr < 1 || cc == 0 || cc == C - 1 || cr == R - 1) {
 					// map clear
 					for (int i = 0; i < R; i++) {
 						for (int j = 0; j < C; j++) {
@@ -236,7 +244,7 @@ int main() {
 		// 정령 이동
 		int n = moveMan(cr, cc, map[cr][cc]);
 		total += n;
-		/*cout << "i : " << i << " maxR : " << n << endl;*/
+		cout << "i : " << i << " maxR : " << n << endl;
 	}
 
 	cout << total;
