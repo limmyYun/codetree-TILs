@@ -147,7 +147,8 @@ int moveMan(int r, int c, int v) {
 			if (map[sr][sc] == 0) continue;
 			if (visited[sr][sc]) continue;
 
-			if (center[nr][nc]) {
+
+			if (map[sr][sc] == nv) {
 				if (maxR < sr) maxR = sr;
 				visited[sr][sc] = true;
 				que.push(make_tuple(sr, sc, map[sr][sc]));
@@ -158,13 +159,26 @@ int moveMan(int r, int c, int v) {
 					visited[sr][sc] = true;
 					que.push(make_tuple(sr, sc, map[sr][sc]));
 				}
-				else {
-					if (map[sr][sc] != nv) continue;
-					if (maxR < sr) maxR = sr;
-					visited[sr][sc] = true;
-					que.push(make_tuple(sr, sc, map[sr][sc]));
-				}
 			}
+
+			//if (center[nr][nc]) {
+			//	if (maxR < sr) maxR = sr;
+			//	visited[sr][sc] = true;
+			//	que.push(make_tuple(sr, sc, map[sr][sc]));
+			//}
+			//else {
+			//	if (out[nr][nc]) {
+			//		if (maxR < sr) maxR = sr;
+			//		visited[sr][sc] = true;
+			//		que.push(make_tuple(sr, sc, map[sr][sc]));
+			//	}
+			//	else {
+			//		if (map[sr][sc] != nv) continue;
+			//		if (maxR < sr) maxR = sr;
+			//		visited[sr][sc] = true;
+			//		que.push(make_tuple(sr, sc, map[sr][sc]));
+			//	}
+			//}
 		}
 	}
 
