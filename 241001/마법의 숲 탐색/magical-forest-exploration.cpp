@@ -204,7 +204,7 @@ int main() {
 
 			if (isExit == false) {
 				// 더이상 갈 수 없고 map 초과했을 때
-				if (cr < 1 || cc == 0 || cc == C - 1) {
+				if (cr < 1 || cc == 0 || cc == C - 1 || cr == R-1) {
 					// map clear
 					for (int i = 0; i < R; i++) {
 						for (int j = 0; j < C; j++) {
