@@ -273,7 +273,7 @@ int main() {
 		}
 
 		// 공 던지기
-		int idx = t % ((n-1)*(n-1));
+		int idx = t % (vec.size());
 		int gr = -1, gc = -1;
 		tie(gr, gc) = throwBall(get<0>(vec[idx]), get<1>(vec[idx]), get<2>(vec[idx]));
 		if ((gr == -1) && (gc == -1)) continue;
