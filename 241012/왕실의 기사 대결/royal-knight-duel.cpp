@@ -122,7 +122,14 @@ void kill(int tar) {
 	}
 
 	damage[tar] += da;
-	if ((power[tar] - damage[tar]) <= 0) dead[tar] = true;
+	if ((power[tar] - damage[tar]) <= 0) {
+		dead[tar] = true;
+		for (int i = 0; i < L; i++) {
+			for (int j = 0; j < L; j++) {
+				if (pMap[i][j] == tar) pMap[i][j] = -1;
+			}
+		}
+	}
 }
 
 int main() {
