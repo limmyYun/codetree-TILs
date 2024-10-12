@@ -40,8 +40,9 @@ vector<int> move(int p, int dir) {
 					moveFail = true;
 					break;
 				}
-				if ((pMap[sr][sc] != p) && (pMap[sr][sc] >= 0)) {
+				if ((pMap[sr][sc] != p) && (pMap[sr][sc] >= 0) && !updated[pMap[sr][sc]]) {
 					hp.push_back(pMap[sr][sc]);
+					updated[pMap[sr][sc]] = true;
 				}
 				//tmp[i][j] = -1;
 				tmp[sr][sc] = p;
@@ -60,7 +61,6 @@ vector<int> move(int p, int dir) {
 	while (true) {
 		if (hp.size() < i + 1) break;
 		target = hp[i];
-		updated[target] = true;
 		
 		for (int i = 0; i < L; i++) {
 			for (int j = 0; j < L; j++) {
@@ -71,8 +71,9 @@ vector<int> move(int p, int dir) {
 						moveFail = true;
 						break;
 					}
-					if ((pMap[sr][sc] != target) && (pMap[sr][sc] >= 0)) {
+					if ((pMap[sr][sc] != target) && (pMap[sr][sc] >= 0) && !updated[pMap[sr][sc]]) {
 						hp.push_back(pMap[sr][sc]);
+						updated[pMap[sr][sc]] = true;
 					}
 					//tmp[i][j] = -1;
 					tmp[sr][sc] = target;
